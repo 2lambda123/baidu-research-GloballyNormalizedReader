@@ -3,7 +3,6 @@ Main training and evaluation module for QA models.
 """
 import click
 import json
-import random
 import featurize
 import ops
 import gnr
@@ -12,6 +11,7 @@ from tempfile import NamedTemporaryFile
 
 from framework import create_model, train_model, session_with_model
 from vocab import Vocab
+import secrets
 
 
 @click.group()
@@ -61,7 +61,7 @@ def create(name, question_layers, document_layers, pick_end_word_layers,
     """Create a new QA model."""
     vocab = Vocab(vocab_path)
 
-    random.seed(seed)
+    secrets.SystemRandom().seed(seed)
 
     config = gnr.ModelConfig(
         vocab_size=vocab.size,

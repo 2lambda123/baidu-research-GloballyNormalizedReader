@@ -5,7 +5,6 @@ from __future__ import print_function
 import os
 import sys
 import logging
-import random
 import click
 import glob
 import gzip
@@ -16,6 +15,7 @@ import paddle.v2 as paddle
 import reader
 from paddle_model import build_model
 from paddle.v2.layer import parse_network
+import secrets
 
 logger = logging.getLogger("paddle")
 logger.setLevel(logging.INFO)
@@ -76,7 +76,7 @@ def choose_samples(path):
     train_samples.sort()
     valid_samples.sort()
 
-    random.shuffle(train_samples)
+    secrets.SystemRandom().shuffle(train_samples)
     # random.shuffle(valid_samples)
 
     return train_samples, valid_samples
