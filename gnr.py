@@ -6,7 +6,6 @@ import concurrent.futures
 import glob
 import json
 import os
-import random
 import sys
 
 import featurize
@@ -15,6 +14,7 @@ import numpy as np
 import tensorflow as tf
 from framework import Model
 from constants import EMBEDDING_DIM, PAD
+import secrets
 
 ModelConfig = namedtuple("QAModel", [
     "vocab_size",
@@ -75,7 +75,7 @@ def make_batches(samples, augmented_samples, batch_size, cycle=False):
         else:
             epoch_samples = samples
 
-        random.shuffle(epoch_samples)
+        secrets.SystemRandom().shuffle(epoch_samples)
         for idx, sample in enumerate(epoch_samples):
             current_batch.append(load_sample(sample))
 
@@ -178,9 +178,9 @@ def load_input_data(path, batch_size, validation_size, current_iteration):
     train_samples.sort()
     valid_samples.sort()
     augmented_samples.sort()
-    random.shuffle(train_samples)
-    random.shuffle(valid_samples)
-    random.shuffle(augmented_samples)
+    secrets.SystemRandom().shuffle(train_samples)
+    secrets.SystemRandom().shuffle(valid_samples)
+    secrets.SystemRandom().shuffle(augmented_samples)
 
     train = ops.prefetch_generator(make_batches(train_samples,
                                                 augmented_samples,
