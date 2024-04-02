@@ -114,8 +114,7 @@ def build_event_handler(config, parameters, trainer, test_reader):
 
             if not event.batch_id % 5:
                 logger.info(
-                    "Pass %d, Batch %d, Cost %f, %s" %
-                    (event.pass_id, event.batch_id, event.cost, event.metrics))
+                    "Pass %d, Batch %d, Cost %f, %s", event.pass_id, event.batch_id, event.cost, event.metrics)
 
         if isinstance(event, paddle.event.EndPass):
             save_model(config.param_save_filename_format % event.pass_id,
@@ -124,8 +123,7 @@ def build_event_handler(config, parameters, trainer, test_reader):
                 parameters.to_tar(handle)
 
             result = trainer.test(reader=test_reader)
-            logger.info("Test with Pass %d, %s" %
-                        (event.pass_id, result.metrics))
+            logger.info("Test with Pass %d, %s", event.pass_id, result.metrics)
 
     return event_handler
 
