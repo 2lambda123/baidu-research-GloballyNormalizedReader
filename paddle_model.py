@@ -1,7 +1,6 @@
 """
 A PaddlePaddle implementation of a question answering model.
 """
-from __future__ import print_function
 
 import json
 import random
