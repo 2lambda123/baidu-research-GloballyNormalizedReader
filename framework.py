@@ -5,12 +5,12 @@ metagraph files.
 from collections import namedtuple
 from contextlib import contextmanager
 import os
-import random
 import time
 
 import tensorflow as tf
 
 import ops
+import secrets
 
 # File to store the model graph to.
 GRAPH_FILENAME = "model.graph"
@@ -287,7 +287,7 @@ def create_model(model_type, name, config, module, embeddings, replace):
     graph = tf.Graph()
     with graph.as_default():
         # Ensure order is consistent across multiple runs.
-        tf.set_random_seed(random.randint(0, 10000))
+        tf.set_random_seed(secrets.SystemRandom().randint(0, 10000))
 
         model = module.build_model(config)
         model.store(graph)
