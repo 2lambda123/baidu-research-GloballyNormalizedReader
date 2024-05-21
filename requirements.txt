@@ -11,7 +11,7 @@ idna==3.7
 Markdown==2.6.8
 numpy==1.26.4
 protobuf==3.18.3
-requests==2.31.0
+requests==2.32.0
 scipy==1.12.0
 six==1.10.0
 smart-open==1.5.3
